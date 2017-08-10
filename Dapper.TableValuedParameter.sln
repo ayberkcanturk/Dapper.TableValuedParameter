@@ -1,0 +1,66 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{39FAD87D-724C-4305-99CE-973F53D4042A}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		appveyor.yml = appveyor.yml
+		build.cake = build.cake
+		build.ps1 = build.ps1
+		common.cake = common.cake
+		common.props = common.props
+		LICENSE = LICENSE
+		packs.ps1 = packs.ps1
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{10E8A1AF-EE1E-42CF-9BB6-D29E97B31424}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dapper.TableValuedParameter", "src\Dapper.TableValueParameter\Dapper.TableValuedParameter.csproj", "{F5818975-BEBE-4952-B587-EB828505E4C1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A98FDA46-B9FA-41D8-9B14-913A076DC717} = {A98FDA46-B9FA-41D8-9B14-913A076DC717}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{A89F4C97-3366-485D-8A69-3FC0E2EAB7C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapper.TableValuedParameter.Tests", "test\Dapper.TableValuedParameter.Tests\Dapper.TableValuedParameter.Tests.csproj", "{A98FDA46-B9FA-41D8-9B14-913A076DC717}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapper.TableValuedParameter.ConsoleCore", "test\Dapper.TableValuedParameter.ConsoleCore\Dapper.TableValuedParameter.ConsoleCore.csproj", "{7B3BCFC4-691F-4B02-B49C-73C10076065A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapper.TableValuedParameter.Console", "test\Dapper.TableValuedParameter.Console\Dapper.TableValuedParameter.Console.csproj", "{579A7478-2836-442D-9C03-FB055F554591}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F5818975-BEBE-4952-B587-EB828505E4C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5818975-BEBE-4952-B587-EB828505E4C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5818975-BEBE-4952-B587-EB828505E4C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5818975-BEBE-4952-B587-EB828505E4C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A98FDA46-B9FA-41D8-9B14-913A076DC717}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A98FDA46-B9FA-41D8-9B14-913A076DC717}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A98FDA46-B9FA-41D8-9B14-913A076DC717}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A98FDA46-B9FA-41D8-9B14-913A076DC717}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B3BCFC4-691F-4B02-B49C-73C10076065A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B3BCFC4-691F-4B02-B49C-73C10076065A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B3BCFC4-691F-4B02-B49C-73C10076065A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B3BCFC4-691F-4B02-B49C-73C10076065A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{579A7478-2836-442D-9C03-FB055F554591}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{579A7478-2836-442D-9C03-FB055F554591}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{579A7478-2836-442D-9C03-FB055F554591}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{579A7478-2836-442D-9C03-FB055F554591}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F5818975-BEBE-4952-B587-EB828505E4C1} = {10E8A1AF-EE1E-42CF-9BB6-D29E97B31424}
+		{A98FDA46-B9FA-41D8-9B14-913A076DC717} = {A89F4C97-3366-485D-8A69-3FC0E2EAB7C2}
+		{7B3BCFC4-691F-4B02-B49C-73C10076065A} = {A89F4C97-3366-485D-8A69-3FC0E2EAB7C2}
+		{579A7478-2836-442D-9C03-FB055F554591} = {A89F4C97-3366-485D-8A69-3FC0E2EAB7C2}
+	EndGlobalSection
+EndGlobal
