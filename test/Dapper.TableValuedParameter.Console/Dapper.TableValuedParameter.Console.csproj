@@ -47,9 +47,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\src\Dapper.TableValueParameter\Dapper.TableValuedParameter.csproj">
       <Project>{f5818975-bebe-4952-b587-eb828505e4c1}</Project>
       <Name>Dapper.TableValuedParameter</Name>
