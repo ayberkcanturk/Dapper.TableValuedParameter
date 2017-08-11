@@ -4,10 +4,17 @@
 
   <PropertyGroup>
     <AssemblyName>Dapper.TableValuedParameter</AssemblyName>
-    <TargetFrameworks>net452;net461;netstandard1.6</TargetFrameworks>
+    <TargetFrameworks>net461;netstandard1.6</TargetFrameworks>
     <PackageId>Dapper.TableValuedParameter</PackageId>
     <PackageTags>Dapper,tvp,TableValuedParameter, TableValueParameter</PackageTags>
     <Description>Dapper extension to use user defined parameter (Table Valued Parameter) in Dapper.</Description>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='net461'">
+  <DefineConstants>NET461</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard1.6'">
+    <DefineConstants>NETSTANDARD1_6</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -17,10 +24,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="bin\$(Configuration)\net452\Dapper.TableValuedParameter.pdb">
-      <PackagePath>lib/net452/</PackagePath>
-      <Pack>true</Pack>
-    </None>
 	    <None Include="bin\$(Configuration)\net461\Dapper.TableValuedParameter.pdb">
       <PackagePath>lib/net461/</PackagePath>
       <Pack>true</Pack>
@@ -30,26 +33,19 @@
       <Pack>true</Pack>
     </None>
   </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Dapper" Version="1.50.2" />
-  </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
-    <Reference Include="System" />
-    <Reference Include="Microsoft.CSharp" />
-	<Reference Include="System.ComponentModel.Annotations" />
-  </ItemGroup>
+  
   <ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">
+    <PackageReference Include="Dapper" Version="1.50.2" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="Microsoft.CSharp" />
-	<Reference Include="System.ComponentModel.Annotations" />
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.6' ">
     <PackageReference Include="NETStandard.Library" Version="1.6.1" />
-    <PackageReference Include="System.RunTime" Version="4.3.0" />
+    <PackageReference Include="Dapper" Version="1.50.2" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.3.0" />
   </ItemGroup>
   <ItemGroup>
-  <Reference Include="System.ComponentModel.Annotations" />
   </ItemGroup>
 </Project>
 
