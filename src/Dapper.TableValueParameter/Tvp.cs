@@ -41,7 +41,7 @@ namespace Dapper.TableValuedParameter
             }
             if (sqlCommand == null)
             {
-                throw new ArgumentException("Could not convert to a SqlCommand.", $"{typeof(SqlCommand).Name}");
+                throw new ArgumentNullException($"{typeof(SqlCommand).Name}", "Could not convert to a SqlCommand.");
             }
 
             SqlParameter sqlParameter = sqlCommand.Parameters.Add(_parameterName, SqlDbType.Structured);
