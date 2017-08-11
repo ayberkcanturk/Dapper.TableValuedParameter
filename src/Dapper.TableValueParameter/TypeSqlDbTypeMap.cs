@@ -4,7 +4,7 @@ using System.Data;
 
 namespace Dapper.TableValueParameter
 {
-    internal static class TypeSqlDbTypeMap
+    public class TypeSqlDbTypeMap
     {
         private static readonly Dictionary<Type, SqlDbType> typeMap = new Dictionary<Type, SqlDbType>
         {
@@ -24,7 +24,7 @@ namespace Dapper.TableValueParameter
             [typeof(TimeSpan)] = SqlDbType.Time
         };
 
-        internal static SqlDbType GetSqlDbType(Type givenType)
+        public virtual SqlDbType GetSqlDbType(Type givenType)
         {
             givenType = Nullable.GetUnderlyingType(givenType) ?? givenType;
             if (typeMap.ContainsKey(givenType))
@@ -35,7 +35,7 @@ namespace Dapper.TableValueParameter
             throw new ArgumentException($"{givenType.FullName} is not a supported .NET class");
         }
 
-        internal static SqlDbType GetSqlDbType<T>()
+        public virtual SqlDbType GetSqlDbType<T>()
         {
             return GetSqlDbType(typeof(T));
         }

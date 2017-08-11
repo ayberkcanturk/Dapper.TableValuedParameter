@@ -16,12 +16,18 @@ namespace Dapper.TableValuedParameter
         private readonly IEnumerable<SqlDataRecord> _rows;
         private readonly string _typeName;
 
-        public Tvp(string parameterName, string typeName, IEnumerable<object> rows)
+        public Tvp(string parameterName, string typeName, 
+            IEnumerable<object> rows, 
+            TypeSqlDbTypeMap typeSqlDbType = null)
         {
             _parameterName = parameterName;
             _typeName = typeName;
 
-            var genericTvp = new GenericTableValuedParameter(rows);
+            if (typeSqlDbType== null)
+            {
+                typeSqlDbType = new TypeSqlDbTypeMap();
+            }
+            var genericTvp = new GenericTableValuedParameter(rows, typeSqlDbType);
             _rows = genericTvp.AsEnumerable();
         }
 

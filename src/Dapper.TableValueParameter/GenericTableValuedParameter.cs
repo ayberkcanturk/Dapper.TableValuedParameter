@@ -14,13 +14,15 @@ using Microsoft.SqlServer.Server;
 namespace Dapper.TableValueParameter
 {
     internal class GenericTableValuedParameter : IEnumerable<SqlDataRecord>
-
     {
         private readonly IEnumerable<object> _tableValuedList;
+        private readonly TypeSqlDbTypeMap _typeSqlDbTypeMap;
 
-        public GenericTableValuedParameter(IEnumerable<object> tableValuedList)
+        public GenericTableValuedParameter(IEnumerable<object> tableValuedList, 
+            TypeSqlDbTypeMap typeSqlDbTypeMap)
         {
             _tableValuedList = tableValuedList;
+            _typeSqlDbTypeMap = typeSqlDbTypeMap;
         }
 
         public IEnumerator<SqlDataRecord> GetEnumerator()
@@ -36,7 +38,7 @@ namespace Dapper.TableValueParameter
                 var columnNameAttribute = property.GetAttribute<ColumnAttribute>();
                 string name = columnNameAttribute != null ? columnNameAttribute.Name : property.Name;
 
-                SqlDbType dbType = TypeSqlDbTypeMap.GetSqlDbType(property.PropertyType);
+                SqlDbType dbType = _typeSqlDbTypeMap.GetSqlDbType(property.PropertyType);
 
                 if (dbType == SqlDbType.NVarChar)
                 {
