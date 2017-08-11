@@ -1,6 +1,6 @@
 
 
-#   Dapper.TableValuedParameter [![Build status](https://ci.appveyor.com/api/projects/status/wv4049ey7666vrq4?svg=true)](https://ci.appveyor.com/project/ayberkcanturk/Dapper.TableValuedParameter)
+#   Dapper.TableValuedParameter [![Build status](https://ci.appveyor.com/api/projects/status/3t2nxjcyy61krfql/branch/master?svg=true)](https://ci.appveyor.com/project/ayberkcanturk/dapper-tablevaluedparameter)
 
 |Package|Status|
 |:------|:-----:|
