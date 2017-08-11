@@ -2,29 +2,30 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 
 using Dapper.TableValueParameter;
 
 using Microsoft.SqlServer.Server;
 
-namespace Dapper
+namespace Dapper.TableValuedParameter
 {
-    public class TableValuedParameter : SqlMapper.IDynamicParameters
+    public class Tvp : SqlMapper.IDynamicParameters
     {
         private readonly string _parameterName;
         private readonly IEnumerable<SqlDataRecord> _rows;
         private readonly string _typeName;
 
-        public TableValuedParameter(string parameterName, string typeName, IEnumerable<object> rows)
+        public Tvp(string parameterName, string typeName, IEnumerable<object> rows)
         {
             _parameterName = parameterName;
             _typeName = typeName;
 
             var genericTvp = new GenericTableValuedParameter(rows);
-            _rows = genericTvp;
+            _rows = genericTvp.AsEnumerable();
         }
 
-        public TableValuedParameter(string parameterName, string typeName, IEnumerable<SqlDataRecord> rows)
+        public Tvp(string parameterName, string typeName, IEnumerable<SqlDataRecord> rows)
         {
             _parameterName = parameterName;
             _typeName = typeName;
