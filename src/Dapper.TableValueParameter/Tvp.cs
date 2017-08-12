@@ -4,8 +4,6 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 
-using Dapper.TableValuedParameter;
-
 using Microsoft.SqlServer.Server;
 
 namespace Dapper.TableValuedParameter

@@ -39,7 +39,6 @@ namespace Dapper.TableValuedParameter
                 string name = columnNameAttribute != null ? columnNameAttribute.Name : property.Name;
 
                 SqlDbType dbType = _typeSqlDbTypeMap.GetSqlDbType(property.PropertyType);
-
                 if (dbType == SqlDbType.NVarChar)
                 {
                     var length = 0;
