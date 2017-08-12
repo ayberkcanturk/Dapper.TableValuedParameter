@@ -1,12 +1,13 @@
 #   Dapper.TableValuedParameter [![Build status](https://ci.appveyor.com/api/projects/status/3t2nxjcyy61krfql/branch/master?svg=true)](https://ci.appveyor.com/project/ayberkcanturk/dapper-tablevaluedparameter)
 
-|Package|Status|
-|:------|:-----:|
-|Dapper.TableValuedParameter|[![NuGet version](https://badge.fury.io/nu/Dapper.TableValuedParameter.svg)](https://badge.fury.io/nu/Dapper.TableValuedParameter)|
 
-## How to use?
+## Installation [![NuGet version](https://badge.fury.io/nu/Dapper.TableValuedParameter.svg)](https://badge.fury.io/nu/Dapper.TableValuedParameter)|
 
-It is easy. Pass your "Tvp" class as a parameter to Dapper Query method. 
+It's as easy as `PM> Install-Package Dapper.TableValuedParameter` from [nuget](http://nuget.org/packages/Dapper.TableValuedParameter)
+
+## Quick Start
+
+Pass your "Tvp" class instance as a parameter to Dapper Query method.
 
 Just an example;
 
