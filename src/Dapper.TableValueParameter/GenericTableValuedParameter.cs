@@ -7,11 +7,11 @@ using System.Data;
 using System.Linq;
 using System.Reflection;
 
-using Dapper.TableValueParameter.Extensions;
+using Dapper.TableValuedParameter.Extensions;
 
 using Microsoft.SqlServer.Server;
 
-namespace Dapper.TableValueParameter
+namespace Dapper.TableValuedParameter
 {
     internal class GenericTableValuedParameter : IEnumerable<SqlDataRecord>
     {

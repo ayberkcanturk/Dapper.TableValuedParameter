@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 
-namespace Dapper.TableValueParameter
+namespace Dapper.TableValuedParameter
 {
     public class TypeSqlDbTypeMap
     {

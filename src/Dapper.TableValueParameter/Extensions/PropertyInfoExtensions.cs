@@ -2,11 +2,11 @@
 using System.Linq;
 using System.Reflection;
 
-namespace Dapper.TableValueParameter.Extensions
+namespace Dapper.TableValuedParameter.Extensions
 {
     /// <summary>
     ///     PropertyInfo Extensions
-    /// </summary>
+    /// </summary>Dapper.TableValueParameter
     internal static class PropertyInfoExtensions
     {
         public static T GetAttribute<T>(this PropertyInfo property) where T : class
