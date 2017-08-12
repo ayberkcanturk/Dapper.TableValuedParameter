@@ -19,6 +19,6 @@ Just an example;
 		... //This is the parameter which is going to be projected to your table-valued parameter.
 		};
 		    
-		return db.Query<Author>("dbo.GetAuthor", new Tvp("@Test", "dbo.UserDefinedType", tvpDto), commandType: CommandType.StoredProcedure).ToList(); 
+		return db.Query<Author>("dbo.GetAuthor", new Tvp("@ParameterName", "dbo.UserDefinedTypeName", tvpDto), commandType: CommandType.StoredProcedure).ToList(); 
             }
 ```
