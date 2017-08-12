@@ -1,7 +1,7 @@
 #   Dapper.TableValuedParameter [![Build status](https://ci.appveyor.com/api/projects/status/3t2nxjcyy61krfql/branch/master?svg=true)](https://ci.appveyor.com/project/ayberkcanturk/dapper-tablevaluedparameter)
 
 
-## Installation [![NuGet version](https://badge.fury.io/nu/Dapper.TableValuedParameter.svg)](https://badge.fury.io/nu/Dapper.TableValuedParameter)|
+## Installation [![NuGet version](https://badge.fury.io/nu/Dapper.TableValuedParameter.svg)](https://badge.fury.io/nu/Dapper.TableValuedParameter)
 
 It's as easy as `PM> Install-Package Dapper.TableValuedParameter` from [nuget](http://nuget.org/packages/Dapper.TableValuedParameter)
 
