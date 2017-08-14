@@ -7,6 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Reflection;
 
+using Dapper.TableValuedParameter.Attributes;
 using Dapper.TableValuedParameter.Extensions;
 
 using Microsoft.SqlServer.Server;
@@ -38,7 +39,9 @@ namespace Dapper.TableValuedParameter
                 var columnNameAttribute = property.GetAttribute<ColumnAttribute>();
                 string name = columnNameAttribute != null ? columnNameAttribute.Name : property.Name;
 
-                SqlDbType dbType = _typeSqlDbTypeMap.GetSqlDbType(property.PropertyType);
+                var mapAttribute = property.GetAttribute<MapAttribute>();
+                SqlDbType dbType = mapAttribute?.SqlDbType ?? _typeSqlDbTypeMap.GetSqlDbType(property.PropertyType);
+
                 if (dbType == SqlDbType.NVarChar)
                 {
                     var length = 0;
