@@ -11,15 +11,39 @@ Pass your "Tvp" class instance as a parameter to Dapper Query method.
 
 Just an example;
 
-```csharp
+```sql
+	CREATE TYPE dbo.SaleOrderDetailType AS TABLE  
+	( UnitPrice MONEY, OrderQty INT ) 
+    
+    	CREATE PROCEDURE [dbo].[GetSaleOrderDetail] @SaleOrderDetail dbo.[SaleOrderDetailType] READONLY
+	AS
+	BEGIN
+			SELECT 
+					SFPP.UnitPrice, 
+					SFPP.OrderQty
+			FROM 
+					SaleOrderDetail AS SOD WITH(NOLOCK) 
+					WHERE UnitPrice = @UnitPrice AND OrderQty = @OrderQty
+	END    
+```
 
-	    using (IDbConnection db = new SqlConnection(ConfigurationManager.ConnectionStrings["AdventureWorks"].ConnectionString))
-	    {
+```csharp
+	public class SaleOrderDetailTypeDto()
+	{
+		[Column(Name:"SellingPrice")]
+		[Map(SqlDbType.Money)]
+		public decimal Price { get; set; } 
+
+		public int OrderQty { get; set; } //We don't need to use attribute for integer types.
+	}
+
+	using (IDbConnection db = new SqlConnection(ConfigurationManager.ConnectionStrings["AdventureWorks"].ConnectionString))
+	{
 		IEnumerable<TvpDto> tvpDto = new List<TvpDto>()
 		{
 		... //This is the parameter which is going to be projected to your table-valued parameter.
 		};
-		    
+
 		return db.Query<Author>("dbo.GetAuthor", new Tvp("@ParameterName", "dbo.UserDefinedTypeName", tvpDto), commandType: CommandType.StoredProcedure).ToList(); 
-            }
+    }
 ```
