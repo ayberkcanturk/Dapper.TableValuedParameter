@@ -19,11 +19,11 @@ Just an example;
 	AS
 	BEGIN
 			SELECT 
-					SFPP.UnitPrice, 
-					SFPP.OrderQty
+					SOD.UnitPrice, 
+					SOD.OrderQty
 			FROM 
 					SaleOrderDetail AS SOD WITH(NOLOCK) 
-					WHERE UnitPrice = @UnitPrice AND OrderQty = @OrderQty
+					WHERE SOD.UnitPrice = @UnitPrice AND SOD.OrderQty = @OrderQty
 	END    
 ```
 
@@ -31,10 +31,10 @@ Just an example;
 	public class SaleOrderDetailTypeDto()
 	{
 		[Column(Name:"SellingPrice")]
-		[Map(SqlDbType.Money)]
+		[Map(SqlDbType.Money)] //.NET framework data type has more than one possibility in SqlDbType such as decimal, money,smallmoney etc. So we have to explictly it.
 		public decimal Price { get; set; } 
 
-		public int OrderQty { get; set; } //We don't need to use attribute for integer types.
+		public int OrderQty { get; set; } //It  will be automatically mapped to SqlDbType.Int
 	}
 
 	using (IDbConnection db = new SqlConnection(ConfigurationManager.ConnectionStrings["AdventureWorks"].ConnectionString))
