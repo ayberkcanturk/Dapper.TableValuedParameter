@@ -39,11 +39,11 @@ Just an example;
 
 	using (IDbConnection db = new SqlConnection(ConfigurationManager.ConnectionStrings["AdventureWorks"].ConnectionString))
 	{
-		IEnumerable<TvpDto> tvpDto = new List<TvpDto>()
+		IEnumerable<SaleOrderDetailTypeDto> tvpDto = new List<SaleOrderDetailTypeDto>()
 		{
 		... //This is the parameter which is going to be projected to your table-valued parameter.
 		};
 
-		return db.Query<Author>("dbo.GetAuthor", new Tvp("@ParameterName", "dbo.UserDefinedTypeName", tvpDto), commandType: CommandType.StoredProcedure).ToList(); 
+		return db.Query<SaleOrderDetail>("dbo.GetSaleOrderDetail", new Tvp("@SaleOrderDetail", "dbo.SaleOrderDetailType", tvpDto), commandType: CommandType.StoredProcedure).ToList(); 
     }
 ```
