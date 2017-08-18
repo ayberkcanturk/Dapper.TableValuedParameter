@@ -25,7 +25,7 @@ namespace Dapper.TableValuedParameter
             {
                 typeSqlDbType = new TypeSqlDbTypeMap();
             }
-            var genericTvp = new GenericTableValuedParameter(rows, typeSqlDbType);
+            var genericTvp = new GenericTableValuedParameter(parameterName, rows, typeSqlDbType);
             _rows = genericTvp.AsEnumerable();
         }
 
