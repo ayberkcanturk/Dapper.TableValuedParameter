@@ -7,6 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Reflection;
 
+using Dapper.TableValuedParameter.Attributes;
 using Dapper.TableValuedParameter.Extensions;
 
 using Microsoft.SqlServer.Server;
@@ -66,22 +67,24 @@ namespace Dapper.TableValuedParameter
                     var columnNameAttribute = property.GetAttribute<ColumnAttribute>();
                     string name = columnNameAttribute != null ? columnNameAttribute.Name : property.Name;
 
-                    SqlDbType dbType = _typeSqlDbTypeMap.GetSqlDbType(property.PropertyType);
-                    if (dbType == SqlDbType.NVarChar)
+                var mapAttribute = property.GetAttribute<MapAttribute>();
+                SqlDbType dbType = mapAttribute?.SqlDbType ?? _typeSqlDbTypeMap.GetSqlDbType(property.PropertyType);
+
+                if (dbType == SqlDbType.NVarChar)
+                {
+                    var length = 0;
+                    var lengthAttribute = property.GetAttribute<MaxLengthAttribute>();
+                    if (lengthAttribute != null)
                     {
-                        var length = 0;
-                        var lengthAttribute = property.GetAttribute<MaxLengthAttribute>();
-                        if (lengthAttribute != null)
-                        {
-                            length = lengthAttribute.Length;
-                        }
-                        metaData[i] = new SqlMetaData(name, dbType, length == default(int) ? SqlMetaData.Max : length);
+                        length = lengthAttribute.Length;
                     }
-                    else
-                    {
-                        metaData[i] = new SqlMetaData(name, dbType);
-                    }
+                    metaData[i] = new SqlMetaData(name, dbType, length == default(int) ? SqlMetaData.Max : length);
                 }
+                else
+                {
+                    metaData[i] = new SqlMetaData(name, dbType);
+                }
+            }
 
                 foreach (object item in _tableValuedList)
                 {
