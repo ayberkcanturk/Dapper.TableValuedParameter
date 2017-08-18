@@ -18,13 +18,14 @@ namespace Dapper.TableValuedParameter
     {
         private readonly IEnumerable<object> _tableValuedList;
         private readonly TypeSqlDbTypeMap _typeSqlDbTypeMap;
+        private readonly string _parameterName;
 
         public GenericTableValuedParameter(
             string parameterName,
-            IEnumerable<object> tableValuedList
-            , 
+            IEnumerable<object> tableValuedList,
             TypeSqlDbTypeMap typeSqlDbTypeMap)
         {
+            _parameterName = parameterName;
             _tableValuedList = tableValuedList;
             _typeSqlDbTypeMap = typeSqlDbTypeMap;
         }
@@ -36,7 +37,10 @@ namespace Dapper.TableValuedParameter
             if (type.IsValueType())
             {
                 #region ValueType
-                var metaData = new SqlMetaData[1];
+                var metaData = new SqlMetaData[1]
+                {
+                    new SqlMetaData(_parameterName, _typeSqlDbTypeMap.GetSqlDbType(type))
+                };
 
                 foreach (var item in _tableValuedList)
                 {
@@ -67,24 +71,24 @@ namespace Dapper.TableValuedParameter
                     var columnNameAttribute = property.GetAttribute<ColumnAttribute>();
                     string name = columnNameAttribute != null ? columnNameAttribute.Name : property.Name;
 
-                var mapAttribute = property.GetAttribute<MapAttribute>();
-                SqlDbType dbType = mapAttribute?.SqlDbType ?? _typeSqlDbTypeMap.GetSqlDbType(property.PropertyType);
+                    var mapAttribute = property.GetAttribute<MapAttribute>();
+                    SqlDbType dbType = mapAttribute?.SqlDbType ?? _typeSqlDbTypeMap.GetSqlDbType(property.PropertyType);
 
-                if (dbType == SqlDbType.NVarChar)
-                {
-                    var length = 0;
-                    var lengthAttribute = property.GetAttribute<MaxLengthAttribute>();
-                    if (lengthAttribute != null)
+                    if (dbType == SqlDbType.NVarChar)
                     {
-                        length = lengthAttribute.Length;
+                        var length = 0;
+                        var lengthAttribute = property.GetAttribute<MaxLengthAttribute>();
+                        if (lengthAttribute != null)
+                        {
+                            length = lengthAttribute.Length;
+                        }
+                        metaData[i] = new SqlMetaData(name, dbType, length == default(int) ? SqlMetaData.Max : length);
                     }
-                    metaData[i] = new SqlMetaData(name, dbType, length == default(int) ? SqlMetaData.Max : length);
+                    else
+                    {
+                        metaData[i] = new SqlMetaData(name, dbType);
+                    }
                 }
-                else
-                {
-                    metaData[i] = new SqlMetaData(name, dbType);
-                }
-            }
 
                 foreach (object item in _tableValuedList)
                 {
