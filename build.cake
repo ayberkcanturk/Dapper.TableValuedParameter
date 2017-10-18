@@ -120,7 +120,7 @@ Task("NugetPublish")
 
 Task("Default")
     .IsDependentOn("Build")
-    .IsDependentOn("Run-Unit-Tests")
+   // .IsDependentOn("Run-Unit-Tests")
     .IsDependentOn("Pack")
     .IsDependentOn("NugetPublish");
     
