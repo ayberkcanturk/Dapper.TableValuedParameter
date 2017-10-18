@@ -19,8 +19,6 @@ var isRelease = EnvironmentVariable("APPVEYOR_REPO_TAG") == "true";
 
 var testProjects = new List<Tuple<string, string[]>>
                 {
-                    new Tuple<string, string[]>("Dapper.TableValuedParameter.Console", new[] { "net461" }),
-                    new Tuple<string, string[]>("Dapper.TableValuedParameter.ConsoleCore", new[] { "netcoreapp2.0" }),
                     new Tuple<string, string[]>("Dapper.TableValuedParameter.Tests", new[] { "net461","netcoreapp2.0" })
                 };
                       
