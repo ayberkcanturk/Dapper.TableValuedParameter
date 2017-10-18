@@ -1,17 +1,7 @@
-#tool "nuget:?package=Cake.CoreCLR";
-#tool "nuget:?package=xunit.runner.console"
-#tool "nuget:?package=MSBuild.SonarQube.Runner.Tool"
-#tool "nuget:?package=JetBrains.dotCover.CommandLineTools"
-#tool "nuget:?package=NuGet.CommandLine"
+#tool "nuget:?package=xunit.runner.console&version=2.3.0-beta4-build3742"
 
-#addin "Cake.Json"
-#addin "Cake.FileHelpers"
 #addin "nuget:?package=NuGet.Core"
 #addin "nuget:?package=Cake.ExtendedNuGet"
-
-#l "common.cake"
-
-using NuGet;
 
 //////////////////////////////////////////////////////////////////////
 // ARGUMENTS
@@ -25,17 +15,19 @@ var configuration = Argument("configuration", "Release");
 var toolpath = Argument("toolpath", @"tools");
 var branch = Argument("branch", EnvironmentVariable("APPVEYOR_REPO_BRANCH"));
 var nugetApiKey = EnvironmentVariable("nugetApiKey");
+var isRelease = EnvironmentVariable("APPVEYOR_REPO_TAG") == "true";
 
-var targetTestFramework = "net461";
-var testFileRegex = $"**/bin/{configuration}/{targetTestFramework}/*Tests*.dll";
-var testProjectNames = new List<string>()
-                      {
-                          "Dapper.TableValuedParameter.Tests"
-                        };
+var testProjects = new List<Tuple<string, string[]>>
+                {
+                    new Tuple<string, string[]>("Dapper.TableValuedParameter.Console", new[] { "net461" }),
+                    new Tuple<string, string[]>("Dapper.TableValuedParameter.ConsoleCore", new[] { "netcoreapp2.0" }),
+                    new Tuple<string, string[]>("Dapper.TableValuedParameter.Tests", new[] { "net461","netcoreapp2.0" })
+                };
+                      
 
 var nupkgPath = "nupkg";
 var nupkgRegex = $"**/{projectName}*.nupkg";
-var nugetPath = toolpath + "/NuGet.CommandLine/tools/nuget.exe";
+var nugetPath = toolpath + "/nuget.exe";
 var nugetQueryUrl = "https://www.nuget.org/api/v2/";
 var nugetPushUrl = "https://www.nuget.org/api/v2/package";
 var NUGET_PUSH_SETTINGS = new NuGetPushSettings
@@ -53,6 +45,7 @@ Task("Clean")
     .Does(() =>
     {
         Information("Current Branch is:" + EnvironmentVariable("APPVEYOR_REPO_BRANCH"));
+        Information($"IsRelase: {isRelease}");
         CleanDirectories("./src/**/bin");
         CleanDirectories("./src/**/obj");
         CleanDirectory(nupkgPath);
@@ -62,12 +55,7 @@ Task("Restore-NuGet-Packages")
     .IsDependentOn("Clean")
     .Does(() =>
     {
-        NuGetRestore(solution, new NuGetRestoreSettings
-                  	{
-                  		NoCache = true,
-                  		Verbosity = NuGetVerbosity.Detailed,
-                  		ToolPath = nugetPath
-                  	});
+        DotNetCoreRestore(solution);
     });
 
 Task("Build")
@@ -82,11 +70,22 @@ Task("Run-Unit-Tests")
     .IsDependentOn("Build")
     .Does(() =>
     {
-        foreach(var testProject in testProjectNames)
+        foreach (Tuple<string, string[]> testProject in testProjects)
         {
-           var testFile = GetFiles($"**/bin/{configuration}/{targetTestFramework}/{testProject}*.dll").First();
-           Information(testFile);
-           XUnit2(testFile.ToString(), new XUnit2Settings { });
+            foreach (string targetFramework in testProject.Item2)
+            {
+                 if(targetFramework == "net461")
+                 {
+                      var testFile = GetFiles($"**/bin/{configuration}/{targetFramework}/{testProject.Item1}*.dll").First();
+                      Information(testFile);
+                      XUnit2(testFile.ToString(), new XUnit2Settings { });
+                 }
+                 else
+                 {
+                    var testProj = GetFiles($"./test/**/*{testProject.Item1}.csproj").First();
+                    DotNetCoreTest(testProj.FullPath, new DotNetCoreTestSettings { Configuration = "Release", Framework = targetFramework });
+                 }             
+            }
         }
     });
     
@@ -126,7 +125,7 @@ Task("Default")
     .IsDependentOn("Run-Unit-Tests")
     .IsDependentOn("Pack")
     .IsDependentOn("NugetPublish");
-
+    
 //////////////////////////////////////////////////////////////////////
 // EXECUTION
 //////////////////////////////////////////////////////////////////////
