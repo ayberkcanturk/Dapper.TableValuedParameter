@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.16
+VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{39FAD87D-724C-4305-99CE-973F53D4042A}"
 	ProjectSection(SolutionItems) = preProject
@@ -22,11 +22,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dapper.TableValuedParameter
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{A89F4C97-3366-485D-8A69-3FC0E2EAB7C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapper.TableValuedParameter.Tests", "test\Dapper.TableValuedParameter.Tests\Dapper.TableValuedParameter.Tests.csproj", "{A98FDA46-B9FA-41D8-9B14-913A076DC717}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dapper.TableValuedParameter.Tests", "test\Dapper.TableValuedParameter.Tests\Dapper.TableValuedParameter.Tests.csproj", "{A98FDA46-B9FA-41D8-9B14-913A076DC717}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dapper.TableValuedParameter.ConsoleCore", "test\Dapper.TableValuedParameter.ConsoleCore\Dapper.TableValuedParameter.ConsoleCore.csproj", "{7B3BCFC4-691F-4B02-B49C-73C10076065A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sample", "sample", "{51F1C38E-04DF-44EA-A240-D4A97C69D569}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapper.TableValuedParameter.Console", "test\Dapper.TableValuedParameter.Console\Dapper.TableValuedParameter.Console.csproj", "{579A7478-2836-442D-9C03-FB055F554591}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dapper.TableValuedParameter.Console", "sample\Dapper.TableValuedParameter.Console\Dapper.TableValuedParameter.Console.csproj", "{579A7478-2836-442D-9C03-FB055F554591}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dapper.TableValuedParameter.Console-netcore20", "sample\Dapper.TableValuedParameter.Console-netcore20\Dapper.TableValuedParameter.Console-netcore20.csproj", "{BC41B6D8-A893-4B16-9F6F-E72876DF385C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,14 +44,14 @@ Global
 		{A98FDA46-B9FA-41D8-9B14-913A076DC717}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A98FDA46-B9FA-41D8-9B14-913A076DC717}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A98FDA46-B9FA-41D8-9B14-913A076DC717}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7B3BCFC4-691F-4B02-B49C-73C10076065A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7B3BCFC4-691F-4B02-B49C-73C10076065A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7B3BCFC4-691F-4B02-B49C-73C10076065A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7B3BCFC4-691F-4B02-B49C-73C10076065A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{579A7478-2836-442D-9C03-FB055F554591}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{579A7478-2836-442D-9C03-FB055F554591}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{579A7478-2836-442D-9C03-FB055F554591}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{579A7478-2836-442D-9C03-FB055F554591}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC41B6D8-A893-4B16-9F6F-E72876DF385C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC41B6D8-A893-4B16-9F6F-E72876DF385C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC41B6D8-A893-4B16-9F6F-E72876DF385C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC41B6D8-A893-4B16-9F6F-E72876DF385C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,7 +59,10 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{F5818975-BEBE-4952-B587-EB828505E4C1} = {10E8A1AF-EE1E-42CF-9BB6-D29E97B31424}
 		{A98FDA46-B9FA-41D8-9B14-913A076DC717} = {A89F4C97-3366-485D-8A69-3FC0E2EAB7C2}
-		{7B3BCFC4-691F-4B02-B49C-73C10076065A} = {A89F4C97-3366-485D-8A69-3FC0E2EAB7C2}
-		{579A7478-2836-442D-9C03-FB055F554591} = {A89F4C97-3366-485D-8A69-3FC0E2EAB7C2}
+		{579A7478-2836-442D-9C03-FB055F554591} = {51F1C38E-04DF-44EA-A240-D4A97C69D569}
+		{BC41B6D8-A893-4B16-9F6F-E72876DF385C} = {51F1C38E-04DF-44EA-A240-D4A97C69D569}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4B737CBF-099E-4887-B323-F2BC5074B69D}
 	EndGlobalSection
 EndGlobal
