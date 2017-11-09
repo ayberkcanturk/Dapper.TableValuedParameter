@@ -4,17 +4,14 @@
 
   <PropertyGroup>
     <AssemblyName>Dapper.TableValuedParameter</AssemblyName>
-    <TargetFrameworks>net461;netstandard1.6</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <PackageId>Dapper.TableValuedParameter</PackageId>
     <PackageTags>Dapper,tvp,TableValuedParameter, TableValueParameter</PackageTags>
     <Description>Dapper extension to use user defined parameter (Table Valued Parameter) in Dapper.</Description>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)'=='net461'">
-  <DefineConstants>DEBUG;NET461;NETSTANDARD1_6</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard1.6'">
-    <DefineConstants>NETSTANDARD1_6</DefineConstants>
+  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
+    <DefineConstants>NETSTANDARD2_0</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -24,26 +21,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-	    <None Include="bin\$(Configuration)\net461\Dapper.TableValuedParameter.pdb">
-      <PackagePath>lib/net461/</PackagePath>
-      <Pack>true</Pack>
-    </None>
-	    <None Include="bin\$(Configuration)\netstandard1.6\Dapper.TableValuedParameter.pdb">
-      <PackagePath>lib/netstandard1.6/</PackagePath>
+	    <None Include="bin\$(Configuration)\netstandard2.0\Dapper.TableValuedParameter.pdb">
+      <PackagePath>lib/netstandard2.0/</PackagePath>
       <Pack>true</Pack>
     </None>
   </ItemGroup>
   
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">
-    <PackageReference Include="Dapper" Version="1.50.2" />
-    <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="Microsoft.CSharp" />
-  </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.6' ">
-    <PackageReference Include="NETStandard.Library" Version="1.6.1" />
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
     <PackageReference Include="Dapper" Version="1.50.2" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.3.0" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="System.Data.SqlClient" Version="4.4.0" />
   </ItemGroup>
 </Project>
 
