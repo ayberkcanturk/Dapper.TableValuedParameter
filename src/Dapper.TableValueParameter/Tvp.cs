@@ -14,17 +14,14 @@ namespace Dapper.TableValuedParameter
         private readonly IEnumerable<SqlDataRecord> _rows;
         private readonly string _typeName;
 
-        public Tvp(string parameterName, string typeName, 
-            IEnumerable<object> rows, 
+        public Tvp(string parameterName, string typeName,
+            IEnumerable<object> rows,
             TypeSqlDbTypeMap typeSqlDbType = null)
         {
             _parameterName = parameterName;
             _typeName = typeName;
 
-            if (typeSqlDbType== null)
-            {
-                typeSqlDbType = new TypeSqlDbTypeMap();
-            }
+            if (typeSqlDbType == null) typeSqlDbType = new TypeSqlDbTypeMap();
             var genericTvp = new GenericTableValuedParameter(parameterName, rows, typeSqlDbType);
             _rows = genericTvp.AsEnumerable();
         }
@@ -39,14 +36,8 @@ namespace Dapper.TableValuedParameter
         public void AddParameters(IDbCommand command, SqlMapper.Identity identity)
         {
             SqlCommand sqlCommand = null;
-            if (command is SqlCommand)
-            {
-                sqlCommand = (SqlCommand)command;
-            }
-            if (sqlCommand == null)
-            {
-                throw new ArgumentNullException($"{typeof(SqlCommand).Name}", "Could not convert to a SqlCommand.");
-            }
+            if (command is SqlCommand command1) sqlCommand = command1;
+            if (sqlCommand == null) throw new ArgumentNullException($"{typeof(SqlCommand).Name}", "Could not convert to a SqlCommand.");
 
             SqlParameter sqlParameter = sqlCommand.Parameters.Add(_parameterName, SqlDbType.Structured);
             sqlParameter.Direction = ParameterDirection.Input;

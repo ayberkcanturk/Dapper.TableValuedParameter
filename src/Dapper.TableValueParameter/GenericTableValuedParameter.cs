@@ -16,9 +16,9 @@ namespace Dapper.TableValuedParameter
 {
     internal class GenericTableValuedParameter : IEnumerable<SqlDataRecord>
     {
+        private readonly string _parameterName;
         private readonly IEnumerable<object> _tableValuedList;
         private readonly TypeSqlDbTypeMap _typeSqlDbTypeMap;
-        private readonly string _parameterName;
 
         public GenericTableValuedParameter(
             string parameterName,
@@ -37,12 +37,13 @@ namespace Dapper.TableValuedParameter
             if (type.IsValueType())
             {
                 #region ValueType
+
                 var metaData = new SqlMetaData[1]
                 {
                     new SqlMetaData(_parameterName, _typeSqlDbTypeMap.GetSqlDbType(type))
                 };
 
-                foreach (var item in _tableValuedList)
+                foreach (object item in _tableValuedList)
                 {
                     var sqlDataRecord = new SqlDataRecord(metaData);
                     try
@@ -56,11 +57,13 @@ namespace Dapper.TableValuedParameter
 
                     yield return sqlDataRecord;
                 }
+
                 #endregion
             }
             else
             {
                 #region Reference Type
+
                 PropertyInfo[] properties = type.GetProperties();
                 var metaData = new SqlMetaData[properties.Length];
 
@@ -78,16 +81,10 @@ namespace Dapper.TableValuedParameter
                     {
                         var length = 0;
                         var lengthAttribute = property.GetAttribute<MaxLengthAttribute>();
-                        if (lengthAttribute != null)
-                        {
-                            length = lengthAttribute.Length;
-                        }
+                        if (lengthAttribute != null) length = lengthAttribute.Length;
                         metaData[i] = new SqlMetaData(name, dbType, length == default(int) ? SqlMetaData.Max : length);
                     }
-                    else
-                    {
-                        metaData[i] = new SqlMetaData(name, dbType);
-                    }
+                    else metaData[i] = new SqlMetaData(name, dbType);
                 }
 
                 foreach (object item in _tableValuedList)
@@ -105,6 +102,7 @@ namespace Dapper.TableValuedParameter
 
                     yield return sqlDataRecord;
                 }
+
                 #endregion
             }
         }

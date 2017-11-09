@@ -3,8 +3,6 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 
-using Dapper.TableValuedParameter.Extensions;
-
 namespace Dapper.TableValuedParameter.ConsoleCore
 {
     public class Author
@@ -23,6 +21,7 @@ namespace Dapper.TableValuedParameter.ConsoleCore
         {
             _connectionString = connectionString;
         }
+
         public IEnumerable<Author> Query()
         {
             using (IDbConnection db = new SqlConnection(_connectionString))

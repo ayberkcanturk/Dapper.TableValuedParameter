@@ -2,14 +2,11 @@
 
 namespace Dapper.TableValuedParameter.Console
 {
-    class Program
+    internal class Program
     {
-        public Program()
+        private static void Main(string[] args)
         {
-        }
-        static void Main(string[] args)
-        {
-            TvpExample e = new TvpExample();
+            var e = new TvpExample();
             IEnumerable<Author> authors = e.Query();
         }
     }

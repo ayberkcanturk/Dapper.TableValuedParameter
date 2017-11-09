@@ -37,10 +37,7 @@ namespace Dapper.TableValuedParameter
         public virtual SqlDbType GetSqlDbType(Type givenType)
         {
             givenType = Nullable.GetUnderlyingType(givenType) ?? givenType;
-            if (_typeSqlDbTypeMap.ContainsKey(givenType))
-            {
-                return _typeSqlDbTypeMap[givenType];
-            }
+            if (_typeSqlDbTypeMap.ContainsKey(givenType)) return _typeSqlDbTypeMap[givenType];
 
             throw new ArgumentException($"{givenType.FullName} is not a supported .NET class");
         }

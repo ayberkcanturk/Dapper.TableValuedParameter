@@ -4,8 +4,6 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 
-using Dapper.TableValuedParameter.Extensions;
-
 namespace Dapper.TableValuedParameter.Console
 {
     public class Author

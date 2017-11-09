@@ -4,7 +4,6 @@ using System.Reflection;
 #else
 using System;
 using System.Reflection;
-using System.Linq;
 #endif
 
 namespace Dapper.TableValuedParameter.Extensions
@@ -37,5 +36,4 @@ namespace Dapper.TableValuedParameter.Extensions
         }
     }
 #endif
-
 }
