@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 
 using Microsoft.SqlServer.Server;
 
@@ -23,7 +22,7 @@ namespace Dapper.TableValuedParameter
 
             if (typeSqlDbType == null) typeSqlDbType = new TypeSqlDbTypeMap();
             var genericTvp = new GenericTableValuedParameter(parameterName, rows, typeSqlDbType);
-            _rows = genericTvp.AsEnumerable();
+            _rows = genericTvp.GetParameter();
         }
 
         public Tvp(string parameterName, string typeName, IEnumerable<SqlDataRecord> rows)
